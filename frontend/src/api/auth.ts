@@ -4,6 +4,9 @@ import { User } from '../types/auth';
 export const getCurrentUser = async (): Promise<User | null> => {
   try {
     const response = await client.get<User>('/api/v1/me');
+    if (response.status === 302 || response.status === 401) {
+      return null;
+    }
     return response.data;
   } catch (error) {
     return null;

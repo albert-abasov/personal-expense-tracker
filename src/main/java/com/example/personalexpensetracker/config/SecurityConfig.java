@@ -3,6 +3,7 @@ package com.example.personalexpensetracker.config;
 import com.example.personalexpensetracker.auth.OAuth2SuccessHandler;
 import com.example.personalexpensetracker.auth.OAuth2UserService;
 import com.example.personalexpensetracker.auth.OidcUserServiceImpl;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,13 @@ public class SecurityConfig {
                         .requestMatchers("/oauth2/**", "/login/**").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"error\":\"Unauthorized\"}");
+                        })
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
                         .userInfoEndpoint(userInfo -> userInfo
