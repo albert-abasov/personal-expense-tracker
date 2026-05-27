@@ -1,6 +1,7 @@
 import { useTransactions, useDeleteTransaction } from './useTransactionQueries';
 import type { Transaction } from '@/types/transactions';
 import type { TransactionFilters } from '@/types/transactions';
+import { CurrencyAmount, Badge } from '@/components';
 
 interface TransactionListProps {
   filters: TransactionFilters;
@@ -50,9 +51,11 @@ export function TransactionList({ filters, onEdit, onPageChange }: TransactionLi
               <tr key={tx.id} className="border-b hover:bg-gray-50">
                 <td className="px-4 py-3 text-xs text-gray-500">{tx.transactionDate}</td>
                 <td className="px-4 py-3">{tx.title}</td>
-                <td className="px-4 py-3 text-xs text-gray-500">{tx.categoryName}</td>
+                <td className="px-4 py-3 text-xs">
+                  <Badge label={tx.categoryName} color="#3B82F6" />
+                </td>
                 <td className="px-4 py-3 text-right font-medium">
-                  {tx.currency} {tx.amount.toFixed(2)}
+                  <CurrencyAmount amount={tx.amount} currency={tx.currency} />
                 </td>
                 <td className="px-4 py-3 text-right">
                   <button

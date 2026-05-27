@@ -6,6 +6,7 @@ import { AppLayout } from '../layouts/AppLayout';
 import { CategoriesPage } from '../features/categories/CategoriesPage';
 import { TransactionsPage } from '../features/transactions/TransactionsPage';
 import BudgetsPage from '../features/budget/BudgetsPage';
+import { DashboardPage } from '../features/dashboard/DashboardPage';
 import { useAuth } from '../features/auth/AuthContext';
 
 const RootRedirect: React.FC = () => {
@@ -31,10 +32,7 @@ export const Router: React.FC = () => {
         element={
           <ProtectedRoute>
             <AppLayout>
-              <div className="p-6">
-                <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-                <p className="text-gray-600 mt-2">Welcome to your expense tracker</p>
-              </div>
+              <DashboardPage />
             </AppLayout>
           </ProtectedRoute>
         }

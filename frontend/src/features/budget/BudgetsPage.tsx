@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import BudgetSummaryCard from './BudgetSummaryCard'
 import { useAllBudgets, useDeleteBudget } from './useBudgetQueries'
+import { CurrencyAmount } from '@/components'
 
 export default function BudgetsPage() {
   const today = new Date()
@@ -99,8 +100,8 @@ export default function BudgetsPage() {
                     <td className="px-6 py-3 text-sm text-gray-900">
                       {String(budget.month).padStart(2, '0')}
                     </td>
-                    <td className="px-6 py-3 text-sm text-gray-900">
-                      {budget.currency} {budget.amount.toFixed(2)}
+                    <td className="px-6 py-3 text-sm text-gray-900 font-medium">
+                      <CurrencyAmount amount={budget.amount} currency={budget.currency} />
                     </td>
                     <td className="px-6 py-3 text-sm">
                       <button

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../features/auth/AuthContext';
 
 interface AppLayoutProps {
@@ -17,18 +17,54 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             <h1 className="text-xl font-bold text-gray-900">Expense Tracker</h1>
             <div className="flex items-center gap-8">
               <nav className="flex gap-6">
-                <Link to="/dashboard" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    `text-sm font-medium pb-1 border-b-2 transition-colors ${
+                      isActive
+                        ? 'text-blue-600 border-blue-600'
+                        : 'text-gray-700 border-transparent hover:text-gray-900'
+                    }`
+                  }
+                >
                   Dashboard
-                </Link>
-                <Link to="/transactions" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+                </NavLink>
+                <NavLink
+                  to="/transactions"
+                  className={({ isActive }) =>
+                    `text-sm font-medium pb-1 border-b-2 transition-colors ${
+                      isActive
+                        ? 'text-blue-600 border-blue-600'
+                        : 'text-gray-700 border-transparent hover:text-gray-900'
+                    }`
+                  }
+                >
                   Transactions
-                </Link>
-                <Link to="/categories" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+                </NavLink>
+                <NavLink
+                  to="/categories"
+                  className={({ isActive }) =>
+                    `text-sm font-medium pb-1 border-b-2 transition-colors ${
+                      isActive
+                        ? 'text-blue-600 border-blue-600'
+                        : 'text-gray-700 border-transparent hover:text-gray-900'
+                    }`
+                  }
+                >
                   Categories
-                </Link>
-                <Link to="/budgets" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+                </NavLink>
+                <NavLink
+                  to="/budgets"
+                  className={({ isActive }) =>
+                    `text-sm font-medium pb-1 border-b-2 transition-colors ${
+                      isActive
+                        ? 'text-blue-600 border-blue-600'
+                        : 'text-gray-700 border-transparent hover:text-gray-900'
+                    }`
+                  }
+                >
                   Budgets
-                </Link>
+                </NavLink>
               </nav>
               <div className="flex items-center gap-4">
             <div className="flex items-center gap-3">

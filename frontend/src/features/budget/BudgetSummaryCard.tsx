@@ -1,6 +1,7 @@
 import { useBudgetSummary, useUpsertBudget } from './useBudgetQueries'
 import { useState } from 'react'
 import BudgetForm from './BudgetForm'
+import { CurrencyAmount } from '@/components'
 
 interface BudgetSummaryCardProps {
   year: number
@@ -55,13 +56,21 @@ export default function BudgetSummaryCard({ year, month }: BudgetSummaryCardProp
               <div>
                 <p className="text-sm text-gray-600">Budget</p>
                 <p className="text-xl font-semibold">
-                  {summary.currency} {summary.budgetAmount?.toFixed(2)}
+                  {summary.budgetAmount !== null ? (
+                    <CurrencyAmount amount={summary.budgetAmount} currency={summary.currency} />
+                  ) : (
+                    '—'
+                  )}
                 </p>
               </div>
               <div>
                 <p className="text-sm text-gray-600">Spent</p>
                 <p className="text-xl font-semibold">
-                  {summary.currency} {summary.totalSpent?.toFixed(2)}
+                  {summary.totalSpent !== null ? (
+                    <CurrencyAmount amount={summary.totalSpent} currency={summary.currency} />
+                  ) : (
+                    '—'
+                  )}
                 </p>
               </div>
               <div>
@@ -71,7 +80,11 @@ export default function BudgetSummaryCard({ year, month }: BudgetSummaryCardProp
                     (summary.remaining ?? 0) < 0 ? 'text-red-600' : 'text-green-600'
                   }`}
                 >
-                  {summary.currency} {summary.remaining?.toFixed(2)}
+                  {summary.remaining !== null ? (
+                    <CurrencyAmount amount={summary.remaining} currency={summary.currency} />
+                  ) : (
+                    '—'
+                  )}
                 </p>
               </div>
             </div>
