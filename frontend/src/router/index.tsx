@@ -5,6 +5,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { AppLayout } from '../layouts/AppLayout';
 import { CategoriesPage } from '../features/categories/CategoriesPage';
 import { TransactionsPage } from '../features/transactions/TransactionsPage';
+import BudgetsPage from '../features/budget/BudgetsPage';
 import { useAuth } from '../features/auth/AuthContext';
 
 const RootRedirect: React.FC = () => {
@@ -54,6 +55,16 @@ export const Router: React.FC = () => {
           <ProtectedRoute>
             <AppLayout>
               <TransactionsPage />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/budgets"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <BudgetsPage />
             </AppLayout>
           </ProtectedRoute>
         }

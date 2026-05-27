@@ -26,6 +26,9 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                 <Link to="/categories" className="text-sm font-medium text-gray-700 hover:text-gray-900">
                   Categories
                 </Link>
+                <Link to="/budgets" className="text-sm font-medium text-gray-700 hover:text-gray-900">
+                  Budgets
+                </Link>
               </nav>
               <div className="flex items-center gap-4">
             <div className="flex items-center gap-3">
