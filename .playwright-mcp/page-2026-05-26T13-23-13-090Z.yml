@@ -1,0 +1,13 @@
+- generic [ref=e2]:
+  - heading "Login with OAuth 2.0" [level=2] [ref=e3]
+  - alert [ref=e4]: Invalid credentials
+  - table [ref=e5]:
+    - rowgroup [ref=e6]:
+      - row "GitHub" [ref=e7]:
+        - cell "GitHub" [ref=e8]:
+          - link "GitHub" [ref=e9] [cursor=pointer]:
+            - /url: /oauth2/authorization/github
+      - row "Google" [ref=e10]:
+        - cell "Google" [ref=e11]:
+          - link "Google" [ref=e12] [cursor=pointer]:
+            - /url: /oauth2/authorization/google

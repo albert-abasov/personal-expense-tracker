@@ -1,0 +1,12 @@
+- generic [ref=e6]:
+  - generic [ref=e7]:
+    - heading "Expense Tracker" [level=1] [ref=e8]
+    - paragraph [ref=e9]: Track your spending, manage your budget
+  - generic [ref=e10]:
+    - button "Sign in with Google" [ref=e11]:
+      - img [ref=e12]
+      - text: Sign in with Google
+    - button "Sign in with GitHub" [ref=e17]:
+      - img [ref=e18]
+      - text: Sign in with GitHub
+  - paragraph [ref=e20]: We use OAuth for secure, password-free login

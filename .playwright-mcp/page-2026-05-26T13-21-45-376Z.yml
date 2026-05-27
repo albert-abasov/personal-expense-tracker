@@ -1,0 +1,48 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - progressbar [ref=e6]
+      - main [ref=e84]:
+        - generic [ref=e85]:
+          - generic [ref=e88]:
+            - img [ref=e90]
+            - generic [ref=e95]: Sign in with Google
+          - generic [ref=e96]:
+            - heading "Welcome" [level=1] [ref=e97]
+            - generic [ref=e101]:
+              - img [ref=e103]
+              - generic [ref=e106]: abasovalik2001@gmail.com
+        - generic [ref=e115]:
+          - generic [ref=e123]:
+            - textbox "Enter your password" [active] [ref=e124]
+            - generic: Enter your password
+          - generic [ref=e131]:
+            - generic [ref=e134] [cursor=pointer]:
+              - checkbox "Show password" [ref=e135]
+              - generic:
+                - img
+            - generic [ref=e138] [cursor=pointer]: Show password
+        - generic [ref=e140]:
+          - button "Next" [ref=e144] [cursor=pointer]:
+            - generic [ref=e147]: Next
+          - button "Forgot password?" [ref=e151]:
+            - generic [ref=e154]: Forgot password?
+    - contentinfo [ref=e69]:
+      - combobox "Change language English (United States)" [ref=e73] [cursor=pointer]:
+        - generic:
+          - generic: English (United States)
+        - generic:
+          - img
+      - list [ref=e75]:
+        - listitem [ref=e76]:
+          - link "Help" [ref=e77] [cursor=pointer]:
+            - /url: https://support.google.com/accounts?hl=en-US&p=account_iph
+        - listitem [ref=e78]:
+          - link "Privacy" [ref=e79] [cursor=pointer]:
+            - /url: https://accounts.google.com/TOS?loc=UA&hl=en-US&privacy=true
+        - listitem [ref=e80]:
+          - link "Terms" [ref=e81] [cursor=pointer]:
+            - /url: https://accounts.google.com/TOS?loc=UA&hl=en-US
+  - iframe [ref=e82]:
+    
+  - generic [ref=e157]: Welcome
