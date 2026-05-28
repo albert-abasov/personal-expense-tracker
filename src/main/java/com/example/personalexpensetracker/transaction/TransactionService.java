@@ -3,7 +3,9 @@ package com.example.personalexpensetracker.transaction;
 import com.example.personalexpensetracker.category.CategoryRepository;
 import com.example.personalexpensetracker.common.NotFoundException;
 import com.example.personalexpensetracker.common.PageResponse;
+import com.example.personalexpensetracker.websocket.TransactionChangedEvent;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -20,6 +22,7 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final CategoryRepository categoryRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional(readOnly = true)
     public PageResponse<TransactionResponse> list(String userId, TransactionListParams params, Pageable pageable) {
@@ -52,7 +55,9 @@ public class TransactionService {
             .notes(req.notes())
             .build();
 
-        return TransactionResponse.from(transactionRepository.save(t));
+        TransactionResponse response = TransactionResponse.from(transactionRepository.save(t));
+        eventPublisher.publishEvent(new TransactionChangedEvent(this, userId));
+        return response;
     }
 
     public TransactionResponse update(String userId, String id, UpdateTransactionRequest req) {
@@ -69,13 +74,16 @@ public class TransactionService {
         t.setCategoryId(req.categoryId());
         t.setNotes(req.notes());
 
-        return TransactionResponse.from(transactionRepository.save(t));
+        TransactionResponse response = TransactionResponse.from(transactionRepository.save(t));
+        eventPublisher.publishEvent(new TransactionChangedEvent(this, userId));
+        return response;
     }
 
     public void delete(String userId, String id) {
         Transaction t = transactionRepository.findByIdAndUserId(id, userId)
             .orElseThrow(() -> new NotFoundException("Transaction not found"));
         transactionRepository.delete(t);
+        eventPublisher.publishEvent(new TransactionChangedEvent(this, userId));
     }
 
     private Specification<Transaction> buildSpec(String userId, TransactionListParams p) {
