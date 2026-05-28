@@ -28,9 +28,6 @@ public class Category {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(length = 7)
-    private String color;
-
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Instant createdAt;

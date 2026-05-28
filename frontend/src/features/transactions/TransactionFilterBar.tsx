@@ -10,19 +10,19 @@ export function TransactionFilterBar({ filters, onChange }: TransactionFilterBar
   const { data: categories = [] } = useCategories();
 
   return (
-    <div className="flex flex-wrap gap-3 mb-6">
+    <div className="mb-6 flex flex-wrap gap-2 items-center">
       <input
         type="text"
         placeholder="Search title or notes..."
         value={filters.q ?? ''}
         onChange={(e) => onChange({ ...filters, q: e.target.value || undefined, page: 0 })}
-        className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-56"
+        className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-56"
       />
 
       <select
         value={filters.categoryId ?? ''}
         onChange={(e) => onChange({ ...filters, categoryId: e.target.value || undefined, page: 0 })}
-        className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
       >
         <option value="">All categories</option>
         {categories.map((cat) => (
@@ -43,7 +43,7 @@ export function TransactionFilterBar({ filters, onChange }: TransactionFilterBar
             page: 0,
           })
         }
-        className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
       >
         <option value="">All time</option>
         <option value="this_month">This month</option>
@@ -56,20 +56,20 @@ export function TransactionFilterBar({ filters, onChange }: TransactionFilterBar
             type="date"
             value={filters.dateFrom ?? ''}
             onChange={(e) => onChange({ ...filters, dateFrom: e.target.value || undefined, page: 0 })}
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           />
           <input
             type="date"
             value={filters.dateTo ?? ''}
             onChange={(e) => onChange({ ...filters, dateTo: e.target.value || undefined, page: 0 })}
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           />
         </>
       )}
 
       <button
         onClick={() => onChange({})}
-        className="px-3 py-2 text-xs font-medium text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
+        className="px-3 py-2 text-xs font-medium text-slate-600 border border-slate-200 rounded-lg hover:text-slate-900 hover:bg-slate-100 transition-colors"
       >
         Clear filters
       </button>

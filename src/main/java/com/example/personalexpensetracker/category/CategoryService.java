@@ -43,7 +43,6 @@ public class CategoryService {
             .id(UUID.randomUUID().toString())
             .userId(userId)
             .name(req.name())
-            .color(req.color() != null && !req.color().isEmpty() ? req.color() : null)
             .createdAt(Instant.now())
             .build();
 
@@ -59,10 +58,6 @@ public class CategoryService {
                 throw new ConflictException("Category name already exists for this user");
             }
             category.setName(req.name());
-        }
-
-        if (req.color() != null) {
-            category.setColor(req.color().isEmpty() ? null : req.color());
         }
 
         return CategoryResponse.from(categoryRepository.save(category));

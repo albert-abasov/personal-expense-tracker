@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Plus } from 'lucide-react';
 import { TransactionList } from './TransactionList';
 import { TransactionForm } from './TransactionForm';
 import { TransactionFilterBar } from './TransactionFilterBar';
@@ -41,33 +42,36 @@ export function TransactionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Transactions</h1>
-          <p className="text-gray-600 mt-1">Track your income and expenses</p>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <button
-            onClick={() => {
-              setEditingTransaction(undefined);
-              setIsFormOpen(true);
-            }}
-            className="mb-6 px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700"
-          >
-            + New Transaction
-          </button>
-
-          <TransactionFilterBar filters={filters} onChange={setFilters} />
-
-          <TransactionList
-            filters={filters}
-            onEdit={handleEdit}
-            onPageChange={handlePageChange}
-          />
-        </div>
+    <div className="py-8">
+      {/* Page header */}
+      <div className="mb-8 pl-2 border-l-4 border-indigo-600">
+        <h1 className="text-4xl font-bold text-slate-900">Transactions</h1>
+        <p className="text-slate-500 mt-2">Track your income and expenses</p>
       </div>
+
+      {/* Header + New button */}
+      <div className="mb-6 flex justify-end">
+        <button
+          onClick={() => {
+            setEditingTransaction(undefined);
+            setIsFormOpen(true);
+          }}
+          className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors text-sm"
+        >
+          <Plus size={18} />
+          New Transaction
+        </button>
+      </div>
+
+      {/* Filter bar */}
+      <TransactionFilterBar filters={filters} onChange={setFilters} />
+
+      {/* Transactions list */}
+      <TransactionList
+        filters={filters}
+        onEdit={handleEdit}
+        onPageChange={handlePageChange}
+      />
 
       <TransactionForm
         onSubmit={handleFormSubmit}

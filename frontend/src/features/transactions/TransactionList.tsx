@@ -1,3 +1,4 @@
+import { Pencil, Trash2, Receipt } from 'lucide-react';
 import { useTransactions, useDeleteTransaction } from './useTransactionQueries';
 import type { Transaction } from '@/types/transactions';
 import type { TransactionFilters } from '@/types/transactions';
@@ -19,83 +20,108 @@ export function TransactionList({ filters, onEdit, onPageChange }: TransactionLi
     }
   };
 
-  if (isLoading) return <div className="text-center text-gray-500 py-8">Loading...</div>;
-  if (error) return <div className="text-center text-red-600 py-8">Error loading transactions</div>;
+  if (isLoading) {
+    return (
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-8 text-center text-slate-500">
+        Loading transactions...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-8 text-center text-red-600">
+        Error loading transactions
+      </div>
+    );
+  }
 
   const { data: rows = [], page = 0, size = 20, total = 0 } = data ?? {};
   const totalPages = Math.ceil(total / size);
 
   if (rows.length === 0) {
     return (
-      <div className="text-center text-gray-500 py-12">
-        <p>No transactions found. Create one to get started!</p>
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-12 text-center">
+        <Receipt size={40} className="text-slate-300 mx-auto mb-4" />
+        <p className="font-medium text-slate-700">No transactions found</p>
+        <p className="text-sm text-slate-500">Create one to get started!</p>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b">
-              <th className="px-4 py-3 text-left font-semibold">Date</th>
-              <th className="px-4 py-3 text-left font-semibold">Title</th>
-              <th className="px-4 py-3 text-left font-semibold">Category</th>
-              <th className="px-4 py-3 text-right font-semibold">Amount</th>
-              <th className="px-4 py-3 text-right font-semibold">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((tx) => (
-              <tr key={tx.id} className="border-b hover:bg-gray-50">
-                <td className="px-4 py-3 text-xs text-gray-500">{tx.transactionDate}</td>
-                <td className="px-4 py-3">{tx.title}</td>
-                <td className="px-4 py-3 text-xs">
-                  <Badge label={tx.categoryName} color="#3B82F6" />
-                </td>
-                <td className="px-4 py-3 text-right font-medium">
-                  <CurrencyAmount amount={tx.amount} currency={tx.currency} />
-                </td>
-                <td className="px-4 py-3 text-right">
-                  <button
-                    onClick={() => onEdit(tx)}
-                    className="px-3 py-1 text-xs font-medium text-blue-600 hover:bg-blue-50 rounded mr-2"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(tx.id)}
-                    disabled={deleteTransaction.isPending}
-                    className="px-3 py-1 text-xs font-medium text-red-600 hover:bg-red-50 rounded disabled:opacity-50"
-                  >
-                    Delete
-                  </button>
-                </td>
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500 font-semibold">
+                <th className="px-6 py-4 text-left">Date</th>
+                <th className="px-6 py-4 text-left">Title</th>
+                <th className="px-6 py-4 text-left">Category</th>
+                <th className="px-6 py-4 text-right">Amount</th>
+                <th className="px-6 py-4 text-right">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {rows.map((tx) => (
+                <tr key={tx.id} className="hover:bg-slate-50 transition-colors">
+                  <td className="px-6 py-4 text-sm text-slate-500">
+                    {new Date(tx.transactionDate).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    })}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-slate-800">{tx.title}</td>
+                  <td className="px-6 py-4 text-sm">
+                    <Badge label={tx.categoryName} />
+                  </td>
+                  <td className="px-6 py-4 text-right font-semibold text-slate-800">
+                    <CurrencyAmount amount={tx.amount} currency={tx.currency} />
+                  </td>
+                  <td className="px-6 py-4 text-right">
+                    <button
+                      onClick={() => onEdit(tx)}
+                      className="inline-flex items-center justify-center p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                      title="Edit"
+                    >
+                      <Pencil size={15} />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(tx.id)}
+                      disabled={deleteTransaction.isPending}
+                      className="inline-flex items-center justify-center p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ml-2"
+                      title="Delete"
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {totalPages > 1 && (
-        <div className="flex items-center justify-between mt-4 px-4 text-sm text-gray-600">
-          <span>{total} total</span>
+        <div className="mt-6 p-4 border-t border-slate-100 bg-slate-50 rounded-b-xl flex justify-between items-center text-sm text-slate-600">
+          <span className="font-medium">{total} transactions</span>
           <div className="flex gap-2">
             <button
               onClick={() => onPageChange(page - 1)}
               disabled={page === 0}
-              className="px-3 py-1 border rounded disabled:opacity-40 hover:bg-gray-50"
+              className="px-3 py-1.5 text-sm border border-slate-200 rounded-lg hover:bg-white disabled:opacity-40 transition-colors"
             >
               Previous
             </button>
-            <span className="px-3 py-1">
+            <span className="px-3 py-1.5 text-slate-600 font-medium">
               Page {page + 1} of {totalPages}
             </span>
             <button
               onClick={() => onPageChange(page + 1)}
               disabled={page >= totalPages - 1}
-              className="px-3 py-1 border rounded disabled:opacity-40 hover:bg-gray-50"
+              className="px-3 py-1.5 text-sm border border-slate-200 rounded-lg hover:bg-white disabled:opacity-40 transition-colors"
             >
               Next
             </button>

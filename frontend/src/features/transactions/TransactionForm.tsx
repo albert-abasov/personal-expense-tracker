@@ -67,19 +67,21 @@ export function TransactionForm({
   const busy = isSubmitting || isLoading;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-md mx-4 p-6">
-        <h2 className="text-lg font-semibold mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-6">
+        <h2 className="text-lg font-semibold text-slate-900 border-b border-slate-100 pb-4 mb-6">
           {defaultValues ? 'Edit Transaction' : 'New Transaction'}
         </h2>
 
         <form onSubmit={handleSubmit}>
           {error && (
-            <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded">{error}</div>
+            <div className="mb-4 p-3 bg-red-50 text-red-600 border border-red-100 text-sm rounded-lg">
+              {error}
+            </div>
           )}
 
           <div className="mb-4">
-            <label htmlFor="tx-title" className="block text-sm font-medium mb-2">
+            <label htmlFor="tx-title" className="block text-sm font-medium text-slate-700 mb-2">
               Title
             </label>
             <input
@@ -91,12 +93,12 @@ export function TransactionForm({
               maxLength={255}
               required
               disabled={busy}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="tx-amount" className="block text-sm font-medium mb-2">
+            <label htmlFor="tx-amount" className="block text-sm font-medium text-slate-700 mb-2">
               Amount (USD)
             </label>
             <input
@@ -109,12 +111,12 @@ export function TransactionForm({
               placeholder="0.00"
               required
               disabled={busy}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="tx-date" className="block text-sm font-medium mb-2">
+            <label htmlFor="tx-date" className="block text-sm font-medium text-slate-700 mb-2">
               Date
             </label>
             <input
@@ -124,12 +126,12 @@ export function TransactionForm({
               onChange={(e) => setTransactionDate(e.target.value)}
               required
               disabled={busy}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="tx-category" className="block text-sm font-medium mb-2">
+            <label htmlFor="tx-category" className="block text-sm font-medium text-slate-700 mb-2">
               Category
             </label>
             <select
@@ -138,7 +140,7 @@ export function TransactionForm({
               onChange={(e) => setCategoryId(e.target.value)}
               required
               disabled={busy}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             >
               <option value="">Select a category</option>
               {categories.map((cat) => (
@@ -150,7 +152,7 @@ export function TransactionForm({
           </div>
 
           <div className="mb-6">
-            <label htmlFor="tx-notes" className="block text-sm font-medium mb-2">
+            <label htmlFor="tx-notes" className="block text-sm font-medium text-slate-700 mb-2">
               Notes (optional)
             </label>
             <textarea
@@ -161,7 +163,7 @@ export function TransactionForm({
               maxLength={2000}
               rows={3}
               disabled={busy}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
             />
           </div>
 
@@ -170,14 +172,14 @@ export function TransactionForm({
               type="button"
               onClick={onClose}
               disabled={busy}
-              className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50"
+              className="flex-1 px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 disabled:opacity-50 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={busy || !title.trim() || !amount || !categoryId || !transactionDate}
-              className="flex-1 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
+              className="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-colors"
             >
               {isSubmitting ? 'Saving...' : 'Save'}
             </button>
