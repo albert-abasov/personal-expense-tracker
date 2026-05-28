@@ -63,7 +63,7 @@ export function CategoryList({ onEdit, onDelete, isDeleting = false }: CategoryL
                     {category.name}
                   </div>
                 </td>
-                <td className="px-6 py-4 text-sm text-slate-500">
+                <td className="px-6 py-4 text-slate-500">
                   {new Date(category.createdAt).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',

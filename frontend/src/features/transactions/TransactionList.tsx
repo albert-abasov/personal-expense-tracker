@@ -66,14 +66,14 @@ export function TransactionList({ filters, onEdit, onPageChange }: TransactionLi
             <tbody className="divide-y divide-slate-100">
               {rows.map((tx) => (
                 <tr key={tx.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 text-sm text-slate-500">
+                  <td className="px-6 py-4 text-slate-500">
                     {new Date(tx.transactionDate).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
                       year: 'numeric',
                     })}
                   </td>
-                  <td className="px-6 py-4 font-medium text-slate-800">{tx.title}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-800">{tx.title}</td>
                   <td className="px-6 py-4 text-sm">
                     <Badge label={tx.categoryName} />
                   </td>

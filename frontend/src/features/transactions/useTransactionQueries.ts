@@ -22,6 +22,7 @@ export function useCreateTransaction() {
     mutationFn: (req: CreateTransactionRequest) => transactionApi.createTransaction(req),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRANSACTIONS_QUERY_KEY });
+      queryClient.invalidateQueries({ queryKey: ['budget'] });
     },
   });
 }
@@ -33,6 +34,7 @@ export function useUpdateTransaction() {
       transactionApi.updateTransaction(id, req),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRANSACTIONS_QUERY_KEY });
+      queryClient.invalidateQueries({ queryKey: ['budget'] });
     },
   });
 }
@@ -43,6 +45,7 @@ export function useDeleteTransaction() {
     mutationFn: (id: string) => transactionApi.deleteTransaction(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRANSACTIONS_QUERY_KEY });
+      queryClient.invalidateQueries({ queryKey: ['budget'] });
     },
   });
 }

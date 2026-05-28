@@ -95,19 +95,19 @@ export function DashboardPage() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full text-sm">
               <thead>
                 <tr className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500 font-semibold">
-                  <th className="px-6 py-4">Date</th>
-                  <th className="px-6 py-4">Title</th>
-                  <th className="px-6 py-4">Category</th>
+                  <th className="px-6 py-4 text-left">Date</th>
+                  <th className="px-6 py-4 text-left">Title</th>
+                  <th className="px-6 py-4 text-left">Category</th>
                   <th className="px-6 py-4 text-right">Amount</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {transactions.map((tx) => (
                   <tr key={tx.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4 text-sm text-slate-500 font-medium">
+                    <td className="px-6 py-4 text-slate-500">
                       {new Date(tx.transactionDate).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -117,7 +117,7 @@ export function DashboardPage() {
                     <td className="px-6 py-4 text-sm">
                       <Badge label={tx.categoryName} />
                     </td>
-                    <td className="px-6 py-4 text-sm font-semibold text-slate-800 text-right">
+                    <td className="px-6 py-4 font-semibold text-slate-800 text-right">
                       <CurrencyAmount amount={tx.amount} currency={tx.currency} />
                     </td>
                   </tr>
