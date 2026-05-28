@@ -23,20 +23,18 @@ Before running the backend, you must configure environment variables and OAuth c
 
 #### Create `.env` File
 
-Create a `.env` file in the project root:
-
-Create a `.env` file in the project root with OAuth credentials and database settings:
+Create a `.env` file in the project root with OAuth credentials and database settings (see .env.example):
 
 ```env
 # SQLite (file-based, auto-created on first run)
 SPRING_DATASOURCE_URL=jdbc:sqlite:./budgettracker.db
 
 # OAuth2 Credentials (see sections below for setup)
-SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_ID=your_google_client_id
-SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_SECRET=your_google_client_secret
+SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_ID={paste_your_google_client_id}
+SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_SECRET={paste_your_google_client_secret}
 
-SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_ID=your_github_client_id
-SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_SECRET=your_github_client_secret
+SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_ID={paste_your_github_client_id}
+SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_SECRET={paste_your_github_client_secret}
 
 # Application URLs (for local development)
 APP_BASE_URL=http://localhost:3000
