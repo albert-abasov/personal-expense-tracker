@@ -66,7 +66,7 @@ export function CategoryForm({
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., Groceries"
+              placeholder="Category name"
               className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               disabled={isSubmitting || isLoading}
               required

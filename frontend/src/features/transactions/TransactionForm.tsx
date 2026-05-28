@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useCategories } from '../categories/useCategoryQueries';
+import type { Category } from '@/types/categories';
 import type { Transaction, CreateTransactionRequest, UpdateTransactionRequest } from '@/types/transactions';
 
 interface TransactionFormProps {
@@ -9,6 +10,7 @@ interface TransactionFormProps {
   onClose: () => void;
   isLoading?: boolean;
   error?: string | null;
+  categories?: Pick<Category, 'id' | 'name'>[];
 }
 
 export function TransactionForm({
@@ -18,8 +20,10 @@ export function TransactionForm({
   onClose,
   isLoading = false,
   error = null,
+  categories: categoriesProp,
 }: TransactionFormProps) {
-  const { data: categories = [] } = useCategories();
+  const { data: fetchedCategories = [] } = useCategories();
+  const categories = categoriesProp ?? fetchedCategories;
 
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
@@ -65,6 +69,8 @@ export function TransactionForm({
   if (!isOpen) return null;
 
   const busy = isSubmitting || isLoading;
+  const parsedAmount = parseFloat(amount);
+  const isAmountValid = amount !== '' && !isNaN(parsedAmount) && parsedAmount > 0;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
@@ -89,7 +95,7 @@ export function TransactionForm({
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g., Coffee"
+              placeholder="Transaction title"
               maxLength={255}
               required
               disabled={busy}
@@ -108,7 +114,7 @@ export function TransactionForm({
               step="0.01"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder="0.00"
+              placeholder="Amount"
               required
               disabled={busy}
               className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
@@ -178,7 +184,7 @@ export function TransactionForm({
             </button>
             <button
               type="submit"
-              disabled={busy || !title.trim() || !amount || !categoryId || !transactionDate}
+              disabled={busy || !title.trim() || !isAmountValid || !categoryId || !transactionDate}
               className="flex-1 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-colors"
             >
               {isSubmitting ? 'Saving...' : 'Save'}
